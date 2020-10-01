@@ -57,6 +57,14 @@ namespace MoviesList.API.Controllers
         public void Update(int id, [FromBody] Movie movie)
         {
 
+            int moviesCount = movieRepository.GetAll().Where(x => x.MovieName.ToLower() == movie.MovieName.ToLower() && x.MovieId != id).ToList().Count();
+
+            //Need to update return function include message
+            if (moviesCount > 0)
+            {
+                return;
+            }
+
             movie.MovieId = id;
             if (ModelState.IsValid)
                 movieRepository.Update(movie);
