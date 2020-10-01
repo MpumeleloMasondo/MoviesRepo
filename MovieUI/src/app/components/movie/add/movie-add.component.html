@@ -1,0 +1,64 @@
+<div class="row p-b-20 p-t-10">
+    <div class="col-md-12">
+        <h3>Create Movie</h3>
+    </div>
+</div>
+
+<div class="align-middle">
+    <div class="card">
+        <div class="card-body">
+         <div class="d-flex">
+            <form [formGroup]="fmGroup" novalidate>
+                <div class="form-group">
+                  <label class="col-md-6 pull-left">Movie Name</label>
+                  <input type="text" class="form-control" 
+                  formControlName="MovieName" 
+                  placeholder="Movie Name"
+                    #MovieName/>
+                </div>
+                <div *ngIf="fmGroup.controls['MovieName'].invalid && (fmGroup.controls['MovieName'].dirty || fmGroup.controls['MovieName'].touched)" class="alert alert-danger">
+                  <div *ngIf="fmGroup.controls['MovieName'].errors.required">
+                    Movie Name is required.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-6">Category </label>
+                  <input type="text" class="form-control" 
+                  formControlName="Category" 
+                  placeholder="Category"
+                    #Category/>
+                </div>
+                <div *ngIf="fmGroup.controls['Category'].invalid && (fmGroup.controls['Category'].dirty || fmGroup.controls['Category'].touched)" class="alert alert-danger">
+                  <div *ngIf="fmGroup.controls['Category'].errors.required">
+                    Category is required.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-6">Rating</label>
+                  <input class="form-control" 
+                 type="number"
+                  placeholder="Rating"
+                  formControlName="Rating" 
+                  #Rating/>
+                </div>
+                <div *ngIf="fmGroup.controls['Rating'].invalid && (fmGroup.controls['Rating'].dirty || fmGroup.controls['Rating'].touched)" class="alert alert-danger">
+                  <div *ngIf="fmGroup.controls['Rating'].errors.required">
+                    Rating is required.
+                  </div>
+                  <div *ngIf="fmGroup.controls['Rating'].errors.min || fmGroup.controls['Rating'].errors.max">
+                    Rating value should be a minimum of 1 and must be a max of 5.
+                  </div>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary btn-fill mr-5"
+                  [disabled]="fmGroup.pristine || fmGroup.invalid"
+                  (click) = "addMovie(MovieName.value, Category.value, Rating.value)">Save</button>
+                  <button type="submit" class="btn btn-secondary btn-fill"
+                  (click) = "cancel()">Cancel</button>
+                </div>
+              </form>
+         </div>
+        </div>
+      </div>
+</div>
+

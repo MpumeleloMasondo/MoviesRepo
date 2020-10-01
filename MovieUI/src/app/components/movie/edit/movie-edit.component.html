@@ -1,0 +1,53 @@
+<p>movie-edit works!</p>
+<div class="card">
+    <div class="card-body">
+      <form [formGroup]="fmGroup" novalidate>
+        <div class="form-group">
+          <label class="col-md-4">Movie Name</label>
+          <input type="text" class="form-control" 
+          formControlName="movieName" 
+            #movieName
+            [(ngModel)] = "movie.movieName"/>
+        </div>
+        <div *ngIf="fmGroup.controls['movieName'].invalid && (fmGroup.controls['movieName'].dirty || fmGroup.controls['movieName'].touched)" class="alert alert-danger">
+          <div *ngIf="fmGroup.controls['movieName'].errors.required">
+            Movie Name is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-4">category </label>
+          <input class="form-control"
+          formControlName="category" 
+          #category
+          [(ngModel)] = "movie.category" />
+        </div>
+        <div *ngIf="fmGroup.controls['category'].invalid && (fmGroup.controls['category'].dirty || fmGroup.controls['category'].touched)" class="alert alert-danger">
+          <div *ngIf="fmGroup.controls['category'].errors.required">
+            category is required.
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-4">Rating</label>
+          <input type="text" class="form-control" 
+          formControlName="rating"   
+          #rating
+          [(ngModel)] = "movie.rating"/>
+        </div>
+        <div *ngIf="fmGroup.controls['rating'].invalid && (fmGroup.controls['rating'].dirty || fmGroup.controls['rating'].touched)" class="alert alert-danger">
+          <div *ngIf="fmGroup.controls['rating'].errors.required">
+            Rating is required.
+          </div>
+          <div *ngIf="fmGroup.controls['rating'].errors.min || fmGroup.controls['rating'].errors.max">
+            Rating value should be a minimum of 1 and must be a max of 5.
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary mr-2 btn-fill"
+          [disabled]="fmGroup.pristine || fmGroup.invalid"
+          (click) = "updateMovie(movieName.value, category.value, rating.value)">Save</button>
+          <button type="submit" class="btn btn-secondary btn-fill"
+          (click) = "cancel()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>

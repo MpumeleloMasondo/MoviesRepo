@@ -1,0 +1,30 @@
+<div class="row p-b-20 p-t-10">
+    <div class="col-md-12">
+        <h3>Ratings</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="header">
+                <h4 class="title">Ratings List</h4>
+            </div>
+            <div class="content table-responsive table-full-width">
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Rating</th>
+                            <th scope="col">Movies</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let movie of movies | filter:search">
+                            <td scope="row">{{ movie.rating }}</td>
+                            <td>{{ movie.moviesCount }}</td>
+                         </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
