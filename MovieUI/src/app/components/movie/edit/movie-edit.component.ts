@@ -30,7 +30,7 @@ export class MovieEditComponent implements OnInit {
   updateMovie(MovieName, Category, Rating) {
     this.route.params.subscribe(params => {
       this.ms.updateMovie(MovieName, Category, Rating, params.id);
-      //this.router.navigate(['movies']);
+      this.router.navigate(['movies']);
     });
   }
 

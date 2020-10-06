@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { MoviesCategory } from '../models/moviescategory.model';
+import { CategoryRating } from '../models/categoryrating.model';
+import { AverageCategoryRating } from '../models/averagerating.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +17,28 @@ export class DashboardService {
 
    getMoviesCountByCategory() :  Observable<MoviesCategory[]>{
 
-    return this.http.get<MoviesCategory[]>(this.moviesUrl + '/dashboard/GetMoviesCountPerCategory')
+    return this.http.get<MoviesCategory[]>(this.moviesUrl + '/stats/GetMoviesCountPerCategory')
       .pipe(
-        tap(_ => console.log('fetched stats')),
+        tap(),
         catchError(this.handleError<MoviesCategory[]>('dashboard', []))
+      );
+  }
+
+  getMoviesByRatingPerCategory() :  Observable<CategoryRating[]>{
+
+    return this.http.get<CategoryRating[]>(this.moviesUrl + '/stats/GetMoviesByRatingPerCategory')
+      .pipe(
+        tap(),
+        catchError(this.handleError<CategoryRating[]>('dashboard', []))
+      );
+  }
+
+  getAverageRatingPerCategory() :  Observable<AverageCategoryRating[]>{
+
+    return this.http.get<AverageCategoryRating[]>(this.moviesUrl + '/stats/GetAverageByRatingPerCategory')
+      .pipe(
+        tap(),
+        catchError(this.handleError<AverageCategoryRating[]>('dashboard', []))
       );
   }
 
@@ -26,8 +46,8 @@ export class DashboardService {
     return (error: any): Observable<T> => {
 
       console.log(`${operation} failed: ${error.message}`);
-
       return of(result as T);
-    };
+
+    }; 
   }
 } 

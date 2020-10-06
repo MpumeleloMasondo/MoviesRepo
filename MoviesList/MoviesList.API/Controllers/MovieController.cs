@@ -59,7 +59,7 @@ namespace MoviesList.API.Controllers
 
             int moviesCount = movieRepository.GetAll().Where(x => x.MovieName.ToLower() == movie.MovieName.ToLower() && x.MovieId != id).ToList().Count();
 
-            //Need to update return function include message
+            //Need to update return function to include message
             if (moviesCount > 0)
             {
                 return;
